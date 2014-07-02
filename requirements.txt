@@ -1,1 +1,5 @@
 https://www.djangoproject.com/download/1.7c1/tarball/
+fabric
+pep8
+coverage
+coveralls
