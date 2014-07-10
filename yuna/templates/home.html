@@ -37,7 +37,10 @@
        <a>Hello {{ user.get_full_name|default:user.username }}!</a>
      </li>
      <li>
-       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+       <a class="btn btn-primary" href="/logout/">
+          <i class="fa fa-sign-out"></i>
+          Logout
+        </a>
      </li>
    {% else %}
      <li>

@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Schedule(models.Model):
@@ -14,6 +15,10 @@ class User(models.Model):
 
     def is_active():
         return True
+
+
+# class CustomUser(AbstractUser):
+#     pass
 
 
 admin.site.register(Schedule)

@@ -2,9 +2,15 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
 # from django.shortcuts import render
+from django.shortcuts import redirect
 from django.shortcuts import render_to_response
 from django.contrib.auth import logout as auth_logout, login
 
+
+def logout(request):
+    """Logs out user"""
+    auth_logout(request)
+    return redirect('/')
 
 def home(request):
     context = RequestContext(request,

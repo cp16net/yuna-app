@@ -139,7 +139,7 @@ SOCIAL_AUTH_PIPELINE = (
     'social.pipeline.social_auth.auth_allowed',
     'social.pipeline.social_auth.social_user',
     'social.pipeline.user.get_username',
-    'example.app.pipeline.require_email',
+    # 'example.app.pipeline.require_email',
     'social.pipeline.mail.mail_validation',
     'social.pipeline.user.create_user',
     'social.pipeline.social_auth.associate_user',
@@ -149,7 +149,7 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 
-SOCIAL_AUTH_USER_MODEL = 'yuna.User'
+# SOCIAL_AUTH_USER_MODEL = 'yuna.User'
 SOCIAL_AUTH_UID_LENGTH = 16
 SOCIAL_AUTH_DEFAULT_USERNAME = 'foobar'
 SOCIAL_AUTH_UUID_LENGTH = 16
@@ -162,7 +162,7 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL= '/logout/'
 LOGIN_ERROR_URL = '/login-error/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL="/home/"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL="/"
 URL_PATH = ''
 
 SOCIAL_AUTH_TWITTER_KEY = "peSeJb8lCGvgOaNH1YJhcXPx3"

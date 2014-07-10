@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('yuna.views',
     url(r'^$', 'home', name='home'),
     url(r'^login/$', 'home'),
+    url(r'^logout/$', 'logout'),
 
     url(r'^admin/', include(admin.site.urls)),
 
