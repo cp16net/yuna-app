@@ -54,3 +54,5 @@ docs/_build/
 
 # Database files
 *.sqlite3
+
+secrets.py

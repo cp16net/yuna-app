@@ -3,3 +3,4 @@ fabric
 pep8
 coverage
 coveralls
+django-social-auth

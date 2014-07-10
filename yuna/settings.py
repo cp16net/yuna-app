@@ -26,6 +26,11 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+try:
+    DEBUG = False
+    from secrets import *
+except ImportError:
+    DEBUG = True
 
 # Application definition
 
@@ -37,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'yuna',
+    'social_auth',
 )
 
 MIDDLEWARE_CLASSES = (
