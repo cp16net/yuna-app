@@ -3,17 +3,23 @@
 {% block content %}
 <div class="container">
 
-    <form class="form-signin" method="post" action="{% url 'django.contrib.auth.views.login' %}">
-        <h2>Please Sign In</h2>
-        <p><a class="signin btn btn-large btn-info" href="{% url 'socialauth_begin' 'twitter' %}">Sign In With Twitter</a></p>
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <input id="id_username" maxlength="254" class="first" name="username" type="text"  placeholder="Username" required {% if form.username.value %}value="{{ form.username.value }}"{% endif %}>
-        <input id="id_password" type="password" name="password" class="last" placeholder="Password" required>
-
-        <button class="signin btn btn-large btn-primary" type="submit">Sign In</button>
-
-    </form>
+    <div class="social">
+          <div class="row">
+              {% if association %}
+                <form class="disconnect-form" action="{% url "social:disconnect_individual" backend=association.provider association_id=association.id %}" method="post">{% csrf_token %}
+                  <a class="col-md-2 btn btn-danger" name="twitter" href="#">
+                    <i class="fa fa-twitter"></i>
+                    Disconnect Twitter
+                  </a>
+                </form>
+              {% else %}
+                <a class="col-md-2 btn btn-default" name="twitter" href="{% url "social:begin" "twitter" %}">
+                  <i class="fa fa-twitter"></i>
+                  twitter
+                </a>
+              {% endif %}
+          </div>
+      </div>
 </div>
 
 {% endblock %}

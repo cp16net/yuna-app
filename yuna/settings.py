@@ -21,8 +21,7 @@ SECRET_KEY = 'q!+=n7p%pel#v*#)%v%7vv(s&*etc0275*(m1s+@ge&=^r$=)$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = []
 
@@ -31,6 +30,13 @@ try:
     from secrets import *
 except ImportError:
     DEBUG = True
+
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+ROOT_URLCONF = 'urls'
 
 # Application definition
 
@@ -42,7 +48,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'yuna',
-    'social_auth',
+    'social.apps.django_app.default',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -88,26 +94,76 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# LOGIN_URL = '/login/'
-# LOGIN_REDIRECT_URL = '/members/'
-# LOGIN_ERROR_URL = '/login-error/'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    }
+}
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.contrib.auth.context_processors.auth",
-    "social_auth.context_processors.social_auth_by_type_backends",
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.contrib.messages.context_processors.messages',
+    'social.apps.django_app.context_processors.backends',
 )
 
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.twitter.TwitterBackend',
+    'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
-SOCIAL_AUTH_UID_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
-SOCIAL_AUTH_NONCE_SERVER_URL_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_SERVER_URL_LENGTH = 16
-SOCIAL_AUTH_ASSOCIATION_HANDLE_LENGTH = 16
-SOCIAL_AUTH_COMPLETE_URL_NAME = 'socialauth_complete'
-SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.social_details',
+    'social.pipeline.social_auth.social_uid',
+    'social.pipeline.social_auth.auth_allowed',
+    'social.pipeline.social_auth.social_user',
+    'social.pipeline.user.get_username',
+    'example.app.pipeline.require_email',
+    'social.pipeline.mail.mail_validation',
+    'social.pipeline.user.create_user',
+    'social.pipeline.social_auth.associate_user',
+    'social.pipeline.social_auth.load_extra_data',
+    'social.pipeline.user.user_details',
+    # 'social.pipeline.debug.debug'
+)
 
+
+SOCIAL_AUTH_USER_MODEL = 'yuna.User'
+SOCIAL_AUTH_UID_LENGTH = 16
+SOCIAL_AUTH_DEFAULT_USERNAME = 'foobar'
+SOCIAL_AUTH_UUID_LENGTH = 16
+SOCIAL_AUTH_CLEAN_USERNAMES = True
+SOCIAL_AUTH_PROTECTED_USER_FIELDS = ['email',]
+SOCIAL_AUTH_STRATEGY = 'social.strategies.django_strategy.DjangoStrategy'
+SOCIAL_AUTH_STORAGE = 'social.apps.django_app.default.models.DjangoStorage'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL= '/logout/'
+LOGIN_ERROR_URL = '/login-error/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL="/home/"
+URL_PATH = ''
+
+SOCIAL_AUTH_TWITTER_KEY = "peSeJb8lCGvgOaNH1YJhcXPx3"
+SOCIAL_AUTH_TWITTER_SECRET = "Qb9JzIKOR0HumTzo9TTWUW9ZBFpunmzd5dMS2hl0c1PbWGzOVh"
