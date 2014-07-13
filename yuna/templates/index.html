@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome</h1>
+    <p>{{ user.get_full_name|default:user.username }}</p>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    <p><a class="btn btn-primary btn-lg" role="button">Learn more &raquo;</a></p>
+  </div>
+  <div class="row">
+    <!-- <div class="container">
+      <h1>Welcome</h1>
+      <p>
+       <ul>
+       {% if user and not user.is_anonymous %}
+         <li>
+           <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+         </li>
+         <li>
+           <a class="btn btn-primary" href="/logout/">
+              <i class="fa fa-sign-out"></i>
+              Logout
+            </a>
+         </li>
+       {% else %}
+         <li>
+           <a href="{% url 'social:begin' 'twitter' %}">Login with Twitter</a>
+         </li>
+       {% endif %}
+       </ul>
+      </p>
+    </div> -->
+  </div>
+</div>
+
+{% endblock %}

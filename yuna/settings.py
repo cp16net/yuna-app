@@ -129,7 +129,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.twitter.TwitterOAuth',
+    'yuna.auth.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -149,7 +149,8 @@ SOCIAL_AUTH_PIPELINE = (
 )
 
 
-# SOCIAL_AUTH_USER_MODEL = 'yuna.User'
+AUTH_USER_MODEL = 'yuna.User'
+SOCIAL_AUTH_USER_MODEL = AUTH_USER_MODEL
 SOCIAL_AUTH_UID_LENGTH = 16
 SOCIAL_AUTH_DEFAULT_USERNAME = 'foobar'
 SOCIAL_AUTH_UUID_LENGTH = 16

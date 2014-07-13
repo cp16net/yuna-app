@@ -7,18 +7,11 @@ class Schedule(models.Model):
     fields = ['user_id', 'schedule']
 
 
-class User(models.Model):
-    fields = ['username', 'email']
-
-    def is_authenticated():
-        return True
-
-    def is_active():
-        return True
+class User(AbstractUser):
+    description = models.TextField(blank=True)
+    picture_url = models.URLField(blank=True, null=True)
+    url = models.URLField(blank=True, null=True)
 
 
-# class CustomUser(AbstractUser):
-#     pass
-
-
+admin.site.register(User)
 admin.site.register(Schedule)
