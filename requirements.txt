@@ -3,4 +3,9 @@ fabric
 pep8
 coverage
 coveralls
+python-googl
 python-social-auth
+celery
+django-celery
+requests-oauth
+requests-oauthlib

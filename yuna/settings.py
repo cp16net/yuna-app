@@ -47,6 +47,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
+    'kombu.transport.django',
     'yuna',
     'social.apps.django_app.default',
 )
@@ -168,3 +170,4 @@ URL_PATH = ''
 
 SOCIAL_AUTH_TWITTER_KEY = "peSeJb8lCGvgOaNH1YJhcXPx3"
 SOCIAL_AUTH_TWITTER_SECRET = "Qb9JzIKOR0HumTzo9TTWUW9ZBFpunmzd5dMS2hl0c1PbWGzOVh"
+
